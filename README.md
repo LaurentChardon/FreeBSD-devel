@@ -22,9 +22,12 @@ To build individial ports in parallel, use
         ALLOW_MAKE_JOBS=yes
 in /usr/local/etc/poudriere.conf
 
-Create a jail
+Create jails
 
         doas poudriere jail -c -j 140rel -v 14.0-RELEASE
+        doas poudriere jail -c -j 132rel -v 13.2-RELEASE
+        doas poudriere jail -a i386 -c -j 140rel-i386 -v 14.0-RELEASE
+        doas poudriere jail -a i386 -c -j 132rel-i386 -v 13.2-RELEASE
 
 Create the ports tree
 
@@ -57,6 +60,9 @@ To test the build including package creation, install and uninstall in a clean e
 To test all the ports that I maintain, listed in the file `my_ports`
 
     doas poudriere bulk -j 140rel -b release_0 -f my_ports
+    doas poudriere bulk -j 132rel -b release_0 -f my_ports
+    doas poudriere bulk -j 132rel-i386 -b release_0 -f my_ports
+    doas poudriere bulk -j 140rel-i386 -b release_0 -f my_ports
 
 The `-b` option in poudriere makes use of pre-compiled dependencies packages instead of recompiling them all from scratch. It currently requires the `poudriere-devel` version of poudriere.
 
