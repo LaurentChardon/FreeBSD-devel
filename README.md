@@ -39,7 +39,7 @@ To make changes in the code, for files that are part of the git repo, make the c
 To make changes in the ported software, first go to its directory and
 
         make extract
-Changes can then be made on any file. Remember to first make a copy with the suffix .orig. That's needed for the patch creation.
+Changes can then be made on any file in `work/portname`. Remember to first make a copy with the suffix .orig. That's needed for the patch creation.
 
 ## Modify port
 If updating the tar file contining the source, after it has been downloaded it needs to be registered with `make makesum`
