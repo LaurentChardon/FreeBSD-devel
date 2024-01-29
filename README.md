@@ -51,6 +51,10 @@ To make the plist, `make makeplist`
 
 To test the changes, if there are dependencies, to install them, do `doas make depends`. Then, to compile and install, just `make`. No root priviledges are required.
 
+To wrap `pkg-descr` to 80 columns, and remove blanks at end of lines (it will keep portlint happy): 
+
+    cat pkg-descr | fold -w 80 -s | sed 's/ $//' > pkg-descr
+
 Once the changes are all done, the port files can be checked with `portlint`
 
 To test the build including package creation, install and uninstall in a clean environment, use poudriere:
