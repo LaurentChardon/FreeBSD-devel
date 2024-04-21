@@ -77,4 +77,13 @@ If new changes are made, the new commit can be merged to the last one with `git 
 Once the changes are commited, a patch can be created for submission
 
     git format-patch -1 main
-Finally, this patch can be submitted to https://bugs.freebsd.org/bugzilla/
+This patch can be submitted to https://bugs.freebsd.org/bugzilla/
+
+Finally, restore the git tree by undoing all your changes so that there won't be errors during your next `pull`
+
+    # undo last commit and discard changes
+    git reset --hard HEAD~
+    # delete untracked files
+    git clean -i .
+
+
