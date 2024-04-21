@@ -20,7 +20,7 @@ where of course category/port is the path of the port in the ports tree.
 To build individial ports in parallel, use
 
         ALLOW_MAKE_JOBS=yes
-in /usr/local/etc/poudriere.conf
+in `/usr/local/etc/poudriere.conf`
 
 Create jails
 
@@ -74,7 +74,7 @@ The `-b` option in poudriere makes use of pre-compiled dependencies packages ins
 When all the changes have all been coded, commit them. The first line of the commit comment must start with `category/port:`
 **FreeBSD commiters prefer that all changes are recorded in only one commit**, to reduce the size of the commit log.
 If new changes are made, the new commit can be merged to the last one with `git commit --amend`
-Once done, a patch can be created for submission
+Once the changes are commited, a patch can be created for submission
 
-    git format-patch main
+    git format-patch -1 main
 Finally, this patch can be submitted to https://bugs.freebsd.org/bugzilla/

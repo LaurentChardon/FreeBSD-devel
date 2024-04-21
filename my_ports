@@ -1,3 +1,6 @@
-misc/img2xterm
-devel/z80-asm
 sysutils/modules
+#net/openmpi
+net/mpich
+#emulators/hatari
+devel/z80-asm
+misc/img2xterm
