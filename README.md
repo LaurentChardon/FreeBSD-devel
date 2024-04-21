@@ -45,16 +45,22 @@ To make changes in the ported software, first go to its directory and
 Changes can then be made on any file in `work/portname`. Remember to first make a copy with the suffix .orig. That's needed for the patch creation.
 
 ## Modify port
-If updating the tar file contining the source, after it has been downloaded it needs to be registered with `make makesum`
-To make the patches, `make makepatch`
-To make the plist, `make makeplist`
+Install dependedncies with `doas make depends clean`. Then, to compile and install, just `make`. No root priviledges are required.
 
-To test the changes, if there are dependencies, to install them, do `doas make depends`. Then, to compile and install, just `make`. No root priviledges are required.
+If the source archive need updating, update the `Makefile` with the new version and download the archive with `make fetch`.
+
+Create a new `distinfo` with `make makesum`
+`make extract` and then make changes in the `work` tree. Make copies of the modified source files with the suffix `.orig` 
+
+To make the patches, `make makepatch` will create patches using the `.orig` files.
+
+To make `pkg-plist`, `make makeplist` creates a static plist. For a better plist, use `panopticum plist` from `ports-mgmt/hs-panopticum`. It requires poudriere. It will create `pkg-plist` with all the %%OPTIONS%% populated properly. It takes a long time.
 
 To wrap `pkg-descr` to 80 columns, and remove blanks at end of lines (it will keep portlint happy): 
 
     cat pkg-descr | fold -w 80 -s | sed 's/ $//' > pkg-descr
 
+## Test port
 Once the changes are all done, the port files can be checked with `portlint`
 
 To test the build including package creation, install and uninstall in a clean environment, use poudriere:
@@ -69,6 +75,8 @@ To test all the ports that I maintain, listed in the file `my_ports`
     doas poudriere bulk -j 140rel-i386 -b release_0 -f my_ports
 
 The `-b` option in poudriere makes use of pre-compiled dependencies packages instead of recompiling them all from scratch. It currently requires the `poudriere-devel` version of poudriere.
+
+To find out which other ports use this port, use `portgrep -u <port>` that will find all ports that have `USES=<port>`
 
 ## Submit changes
 When all the changes have all been coded, commit them. The first line of the commit comment must start with `category/port:`
@@ -85,5 +93,4 @@ Finally, restore the git tree by undoing all your changes so that there won't be
     git reset --hard HEAD~
     # delete untracked files
     git clean -i .
-
 
