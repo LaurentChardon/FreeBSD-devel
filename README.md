@@ -54,7 +54,7 @@ Create a new `distinfo` with `make makesum`
 
 To make the patches, `make makepatch` will create patches using the `.orig` files.
 
-To make `pkg-plist`, `make makeplist` creates a static plist. For a better plist, use `panopticum plist` from `ports-mgmt/hs-panopticum`. It requires poudriere. It will create `pkg-plist` with all the %%OPTIONS%% populated properly. It takes a long time.
+To make `pkg-plist`, `make makeplist` creates a static plist. For a better plist, use `doas panopticum plist category/port -j 140rel` from `ports-mgmt/hs-panopticum`. It requires poudriere. It will create `pkg-plist` with all the %%OPTIONS%% populated properly. It takes a long time.
 
 To wrap `pkg-descr` to 80 columns, and remove blanks at end of lines (it will keep portlint happy): 
 
