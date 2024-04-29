@@ -65,14 +65,14 @@ Once the changes are all done, the port files can be checked with `portlint`
 
 To test the build including package creation, install and uninstall in a clean environment, use poudriere:
 
-    doas poudriere testport -j 140rel -b release_0 category/port
+    doas poudriere testport -j 140rel -b latest category/port
 
 To test all the ports that I maintain, listed in the file `my_ports`
 
-    doas poudriere bulk -j 140rel -b release_0 -f my_ports
-    doas poudriere bulk -j 132rel -b release_0 -f my_ports
-    doas poudriere bulk -j 132rel-i386 -b release_0 -f my_ports
-    doas poudriere bulk -j 140rel-i386 -b release_0 -f my_ports
+    doas poudriere bulk -j 140rel -b latest -f my_ports
+    doas poudriere bulk -j 132rel -b latest -f my_ports
+    doas poudriere bulk -j 132rel-i386 -b latest -f my_ports
+    doas poudriere bulk -j 140rel-i386 -b latest -f my_ports
 
 The `-b` option in poudriere makes use of pre-compiled dependencies packages instead of recompiling them all from scratch. It currently requires the `poudriere-devel` version of poudriere.
 
