@@ -84,10 +84,10 @@ When all the changes have all been coded, commit them. The first line of the com
 If new changes are made, the new commit can be merged to the last one with `git commit --amend`
 Once the changes are commited, a patch can be created for submission
 
-    # If on the smae bramch:
-    git format-patch -1 main
+    # If on the same bramch:
+    git format-patch -1 main .
     # Otherwise:
-    git format-patch main
+    git format-patch main .
 This patch can be submitted to https://bugs.freebsd.org/bugzilla/
 
 Finally, restore the git tree by undoing all your changes so that there won't be errors during your next `pull`
