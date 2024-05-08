@@ -22,9 +22,9 @@ Configure the make system at `/etc/make.conf`
     DEVELOPER=yes
     # Use ccache
     WITH_CCACHE_BUILD=yes
-    # Allow multithread build
+    # Suppress prompts
     BATCH=yes
-    # Allows automatic sudo for install-type targets
+    # Allow automatic sudo for install-type targets
     SU_CMD=/usr/local/bin/sudo -E sh -c
 
 And configure ccache with
