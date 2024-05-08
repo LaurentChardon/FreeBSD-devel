@@ -16,6 +16,22 @@ Create a new branch to work in
     git branch category/port
 where of course category/port is the path of the port in the ports tree.
 
+Configure the make system at `/etc/make.conf`
+
+    # Set developer mode
+    DEVELOPER=yes
+    # Use ccache
+    WITH_CCACHE_BUILD=yes
+    # Allow multithread build
+    BATCH=yes
+    # Allows automatic sudo for install-type targets
+    SU_CMD=/usr/local/bin/sudo -E sh -c
+
+And configure ccache with
+
+    mkdir -p $HOME/.ccache
+    cat 'export CCACHE_DIR=$HOME/.ccache' >> $HOME/.config/zsh/.zshrc.FreeBSD
+
 ## Poudriere configuration
 To build individial ports in parallel, use
 
