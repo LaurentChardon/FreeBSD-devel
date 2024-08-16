@@ -11,5 +11,5 @@ PORT=$1
 
 for jail in $JAILS
 do
-	sudo poudriere testport -k -j $jail -b release $PORT 2>&1 | tee build-$jail.log
+	sudo poudriere testport -k -j $jail -b latest $PORT 2>&1 | tee build-$jail.log
 done

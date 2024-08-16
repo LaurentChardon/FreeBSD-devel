@@ -10,5 +10,5 @@ pkg install tmux neovim git portlint portgrep zsh zsh-autosuggestions zsh-syntax
 ```
 ## Install Desktop essentials
 ```
-sudo pkg install xfce firefox kitty xfce4-cpugraph-plugin
+sudo pkg install xfce lightdm firefox kitty xfce4-cpugraph-plugin
 ```

@@ -40,10 +40,13 @@ in `/usr/local/etc/poudriere.conf`
 
 Create jails
 
+        doas poudriere jail -c -j 150cur -v 15.0-CURRENT
+        doas poudriere jail -c -j 141rel -v 14.1-RELEASE
         doas poudriere jail -c -j 140rel -v 14.0-RELEASE
+        doas poudriere jail -c -j 133rel -v 13.3-RELEASE
         doas poudriere jail -c -j 132rel -v 13.2-RELEASE
-        doas poudriere jail -a i386 -c -j 140rel-i386 -v 14.0-RELEASE
-        doas poudriere jail -a i386 -c -j 132rel-i386 -v 13.2-RELEASE
+        doas poudriere jail -a i386 -c -j 150cur-i386 -v 15.0-CURRENT
+        doas poudriere jail -a i386 -c -j 133rel-i386 -v 13.3-RELEASE
 
 Create the ports tree
 
@@ -51,7 +54,7 @@ Create the ports tree
 
 Update the jail to a new FreeBSD release
 
-        doas poudriere jail -u -j 140rel
+        doas poudriere jail -u -j 141rel
 
 ## Coding
 To make changes in the code, for files that are part of the git repo, make the changes
@@ -70,7 +73,7 @@ Create a new `distinfo` with `make makesum`
 
 To make the patches, `make makepatch` will create patches using the `.orig` files.
 
-To make `pkg-plist`, `make makeplist` creates a static plist. For a better plist, use `doas panopticum plist category/port -j 140rel` from `ports-mgmt/hs-panopticum`. It requires poudriere. It will create `pkg-plist` with all the %%OPTIONS%% populated properly. It takes a long time.
+To make `pkg-plist`, `make makeplist` creates a static plist. For a better plist, use `doas panopticum plist category/port -j 141rel` from `ports-mgmt/hs-panopticum`. It requires poudriere. It will create `pkg-plist` with all the %%OPTIONS%% populated properly. It takes a long time.
 
 To wrap `pkg-descr` to 80 columns, and remove blanks at end of lines (it will keep portlint happy): 
 
@@ -81,14 +84,17 @@ Once the changes are all done, the port files can be checked with `portlint`
 
 To test the build including package creation, install and uninstall in a clean environment, use poudriere:
 
-    doas poudriere testport -j 140rel -b latest category/port
+    doas poudriere testport -j 141rel -b latest category/port
 
 To test all the ports that I maintain, listed in the file `my_ports`
 
+    doas poudriere bulk -j 150cur -b latest -f my_ports
+    doas poudriere bulk -j 141rel -b latest -f my_ports
     doas poudriere bulk -j 140rel -b latest -f my_ports
+    doas poudriere bulk -j 133rel -b latest -f my_ports
     doas poudriere bulk -j 132rel -b latest -f my_ports
-    doas poudriere bulk -j 132rel-i386 -b latest -f my_ports
-    doas poudriere bulk -j 140rel-i386 -b latest -f my_ports
+    doas poudriere bulk -j 150cur-i386 -b latest -f my_ports
+    doas poudriere bulk -j 133rel-i386 -b latest -f my_ports
 
 The `-b` option in poudriere makes use of pre-compiled dependencies packages instead of recompiling them all from scratch. It currently requires the `poudriere-devel` version of poudriere.
 
