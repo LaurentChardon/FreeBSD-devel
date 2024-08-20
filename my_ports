@@ -1,6 +1,8 @@
-sysutils/modules
-net/openmpi
-net/mpich
-emulators/hatari
 devel/z80-asm
+emulators/hatari
 misc/img2xterm
+net/mpich
+net/openmpi
+net/py-mpi4py
+sysutils/modules
+sysutils/nerdctl
