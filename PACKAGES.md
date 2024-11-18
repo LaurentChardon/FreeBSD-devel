@@ -1,14 +1,14 @@
 # Package management on developer workstation
-## Remove all installed packages
-```
-sudo pkg remove -a
-```
-## Install essential packages
-As root:
-```
-pkg install tmux neovim git portlint portgrep zsh zsh-autosuggestions zsh-syntax-highlighting sudo doas poudriere-devel nginx cmake ninja mutt htop neofetch
-```
-## Install Desktop essentials
-```
-sudo pkg install nvidia-drm-kmod xorg xfce lightdm lightdm-gtk-greeter firefox kitty xfce4-cpugraph-plugin xfce4-wm-themes xfce4-genmon-plugin xfce4-docklike-plugin xfce4-clipman-plugin
-```
+Use ansible from a remote machine to remove all installed packages and install base system.
+This is useful when the machine is polluted by development packages and needs to be cleaned.
+
+Use
+    ansible-playbook -i inventory packages.yml
+
+The file inventory is of the form
+    [freebsd_target]
+    freebsd.home
+    
+    [freebsd_target:vars]
+    ansible_python_interpreter=/usr/local/bin/python
+

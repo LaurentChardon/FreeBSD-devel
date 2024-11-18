@@ -1,0 +1,153 @@
+---
+# Playbook to remove all packages and perform a fresh package install.
+# The first play uses sudo.
+# The second play connects as root to perform the package operations.
+
+- name: Enable root login using a non-root user with sudo
+  hosts: freebsd_target
+  gather_facts: no
+  vars:
+    sshd_config_path: /etc/ssh/sshd_config
+    sshd_backup_path: /etc/ssh/sshd_config.ansible.bak
+  become: yes
+  tasks:
+    - name: Backup sshd_config before modification
+      copy:
+        src: "{{ sshd_config_path }}"
+        dest: "{{ sshd_backup_path }}"
+        remote_src: yes
+        owner: root
+        group: wheel
+        mode: '0600'
+      when: sshd_backup_created is not defined
+      register: sshd_backup_created
+
+    - name: Enable root login in sshd_config
+      lineinfile:
+        path: "{{ sshd_config_path }}"
+        regexp: '^#?PermitRootLogin\s+.*'
+        line: 'PermitRootLogin yes'
+        create: no
+      notify: Restart SSHD
+
+  handlers:
+    - name: Restart SSHD
+      service:
+        name: sshd
+        state: restarted
+
+- name: Perform package operations as root
+  hosts: freebsd_target
+  gather_facts: no
+  remote_user: root  # Connect as root
+  vars:
+    base_packages:
+      - tmux
+      - neovim
+      - git
+      - portlint
+      - portgrep
+      - zsh
+      - zsh-autosuggestions
+      - zsh-syntax-highlighting
+      - sudo
+      - doas
+      - poudriere-devel
+      - nginx
+      - cmake
+      - ninja
+      - mutt
+      - htop
+      - neofetch
+    xfce_packages:
+      - lightdm
+      - lightdm-gtk-greeter
+      - xfce4-cpugraph-plugin
+      - xfce4-wm-themes
+      - xfce4-genmon-plugin
+      - xfce4-docklike-plugin
+      - xfce4-clipman-plugin
+    gnome_packages:
+      - gnome
+      - gnome-menus
+    gui_packages:
+      - xorg
+      - xfce
+      - firefox
+      - kitty
+    optional_packages: []
+    sshd_config_path: /etc/ssh/sshd_config
+    sshd_backup_path: /etc/ssh/sshd_config.ansible.bak
+  tasks:
+    - name: Detect if Nvidia hardware is present
+      command: pciconf -lv
+      register: pci_devices
+
+    - name: Record Nvidia detection
+      set_fact:
+        has_nvidia: true
+      when: pci_devices.stdout | regex_search('(?i)nvidia')
+
+    - name: Add nvidia-drm-kmod to optional_packages if Nvidia is detected
+      set_fact:
+        optional_packages: "{{ optional_packages + ['nvidia-drm-kmod'] }}"
+      when: has_nvidia is defined and has_nvidia
+
+    - name: Remove all installed packages
+      command: pkg delete -afy
+
+    - name: Bootstrap pkg
+      raw: /usr/sbin/pkg bootstrap -y
+
+    - name: Update package repository
+      raw: pkg update -f
+
+    - name: Install Python using raw command
+      raw: pkg install -y python
+
+    - name: Install base packages
+      pkgng:
+        name: "{{ base_packages }}"
+        state: present
+
+    - name: Install gnome packages
+      pkgng:
+        name: "{{ gnome_packages }}"
+        state: present
+
+    - name: Set-up gnome sleep      
+      shell: |
+        gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 0
+        gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type    'nothing'
+
+    - name: Install GUI packages
+      pkgng:
+        name: "{{ gui_packages }}"
+        state: present
+
+    - name: Install optional packages
+      pkgng:
+        name: "{{ optional_packages }}"
+        state: present
+      when: optional_packages | length > 0
+
+    - name: Restore original sshd_config from backup
+      copy:
+        src: "{{ sshd_backup_path }}"
+        dest: "{{ sshd_config_path }}"
+        remote_src: yes
+        owner: root
+        group: wheel
+        mode: '0600'
+      notify: Restart SSHD
+
+    - name: Remove sshd_config backup file
+      file:
+        path: "{{ sshd_backup_path }}"
+        state: absent
+
+  handlers:
+    - name: Restart SSHD
+      service:
+        name: sshd
+        state: restarted
