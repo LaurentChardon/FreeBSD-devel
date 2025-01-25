@@ -23,6 +23,8 @@
       - mutt
       - htop
       - neofetch
+      - rust-nightly
+      - node
     xfce_packages:
       - lightdm
       - lightdm-gtk-greeter
