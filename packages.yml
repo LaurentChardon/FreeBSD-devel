@@ -80,8 +80,8 @@
       become: yes
       shell: |
         pkg delete -afy
-        /usr/sbin/pkg bootstrap -y
-        pkg update -f
+        IGNORE_OSVERSION=yes /usr/sbin/pkg bootstrap -y
+        IGNORE_OSVERSION=yes pkg update -f
         pkg install -y python sudo
 
     - name: Install base packages
