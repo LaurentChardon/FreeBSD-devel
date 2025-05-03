@@ -1,0 +1,10 @@
+devel/py-archinfo
+devel/py-cle
+devel/demumble
+devel/py-pydemumble
+math/py-claripy
+security/py-ailment
+security/py-angr
+security/py-cart
+security/py-pyvex
+sysutils/py-unique-log-filter
