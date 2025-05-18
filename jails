@@ -6,11 +6,11 @@
 142rel-amd64
 142rel-arm64_aarch64
 142rel-riscv_riscv64
-141rel-i386
-141rel-amd64
-141rel-arm64_aarch64
-141rel-riscv_riscv64
 134rel-i386
 134rel-amd64
 134rel-arm64_aarch64
 134rel-riscv_riscv64
+135rel-i386
+135rel-amd64
+135rel-arm64_aarch64
+135rel-riscv_riscv64
