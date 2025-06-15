@@ -2,6 +2,10 @@
 150cur-amd64
 150cur-arm64_aarch64
 150cur-riscv_riscv64
+143rel-i386
+143rel-amd64
+143rel-arm64_aarch64
+143rel-riscv_riscv64
 142rel-i386
 142rel-amd64
 142rel-arm64_aarch64
