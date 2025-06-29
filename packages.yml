@@ -35,7 +35,7 @@
       - xfce4-genmon-plugin
       - xfce4-wm-themes
     gnome_packages:
-      - gnome
+      - gnome-desktop
       - gnome-menus
     gui_packages:
       - firefox
