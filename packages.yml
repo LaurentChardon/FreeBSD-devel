@@ -17,6 +17,7 @@
       - sudo
       - tmux
       - todo
+      - zfs-periodic
       - zsh
       - zsh-autosuggestions
       - zsh-syntax-highlighting
@@ -53,6 +54,7 @@
       - portlint
       - poudriere-devel
       - py311-sphinx
+      - qemu-user-static
       - rust-nightly
 
 
