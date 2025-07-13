@@ -30,8 +30,16 @@
       - xfce4-genmon-plugin
       - xfce4-wm-themes
     gnome_packages:
+      - gedit
+      - gnome-backgrounds
+      - gnome-control-center
       - gnome-desktop
+      - gnome-keyring
       - gnome-menus
+      - gnome-screenshot
+      - gnome-system-monitor
+      - gnome-terminal
+      - gnome-tweaks
     gui_packages:
       - firefox
       - kitty
