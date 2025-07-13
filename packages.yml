@@ -60,10 +60,11 @@
       - portfmt
       - portgrep
       - portlint
+      - portupgrade
       - poudriere-devel
       - py311-sphinx
       - qemu-user-static
-      - rust-nightly
+      - rust
 
 
   pre_tasks:
