@@ -11,5 +11,5 @@ PORT=$1
 
 for jail in $JAILS
 do
-	sudo nice poudriere -A testport -k -j $jail -b latest $PORT 2>&1 | tee build-$jail.log
+	sudo script -q build-$jail.log nice -n 10 poudriere -A testport -k -j ${jail} -b latest $PORT 2>&1
 done
