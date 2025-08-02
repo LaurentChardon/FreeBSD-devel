@@ -33,9 +33,6 @@
       - gedit
       - gnome
       - gnome-backgrounds
-      - gnome-control-center
-      - gnome-desktop
-      - gnome-keyring
       - gnome-menus
       - gnome-screenshot
       - gnome-system-monitor
