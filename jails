@@ -1,14 +1,7 @@
-150cur-i386
 150cur-amd64
 143rel-i386
 143rel-amd64
 143rel-arm64_aarch64
 143rel-riscv_riscv64
-142rel-i386
-142rel-amd64
-142rel-arm64_aarch64
-142rel-riscv_riscv64
-134rel-i386
-134rel-amd64
 135rel-i386
 135rel-amd64
