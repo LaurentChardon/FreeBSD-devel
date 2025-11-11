@@ -1,8 +1,17 @@
+deskutils/cairo-dock
+deskutils/cairo-dock-plugins
+devel/distcc
 devel/z80-asm
+emulators/einstein
 emulators/hatari
+emulators/mame
+math/openlibm
 misc/img2xterm
 net/mpich
 net/openmpi
+net/pmix
+net/prrte
 net/py-mpi4py
+net/py-mpi4py-mpich
 sysutils/modules
 sysutils/nerdctl
