@@ -22,6 +22,10 @@ extract_version() {
             suffix="RELEASE"
             version="${base_jail%rel}"
             ;;
+        *sta)
+            suffix="STABLE"
+            version="${base_jail%sta}"
+            ;;
         *)
             echo "Unrecognized jail naming: $jail" >&2
             return 1
