@@ -14,6 +14,7 @@
       - neofetch
       - neovim
       - nginx
+      - rsync
       - sudo
       - tmux
       - todo
@@ -41,6 +42,7 @@
       - gnome-terminal
       - gnome-tweaks
     gui_packages:
+      - cairo-dock
       - firefox
       - kitty
       - xfce
