@@ -45,7 +45,6 @@
       - cairo-dock
       - firefox
       - kitty
-      - xfce
       - xorg
     optional_packages:
       - ccache
