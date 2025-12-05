@@ -45,6 +45,7 @@
       - gnome-tweaks
     gui_packages:
       - cairo-dock
+      - cairo-dock-plugins
       - firefox
       - kitty
       - xorg
@@ -101,7 +102,7 @@
 
     - name: Add nvidia-drm-kmod to optional_packages if Nvidia is detected
       set_fact:
-        optional_packages: "{{ optional_packages + ['nvidia-drm-kmod nvidia-drm-66-kmod'] }}"
+        optional_packages: "{{ optional_packages + ['nvidia-drm-kmod'] + ['nvidia-drm-66-kmod'] }}"
       when: has_nvidia is defined and has_nvidia
 
     - name: Record Radeon detection
