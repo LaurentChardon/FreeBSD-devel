@@ -40,6 +40,7 @@
       - gnome-backgrounds
       - gnome-menus
       - gnome-screenshot
+      - gnome-shell-extension-dashtodock
       - gnome-system-monitor
       - gnome-terminal
       - gnome-tweaks
@@ -65,6 +66,7 @@
       - portfmt
       - portgrep
       - portlint
+      - port-tools
       - portupgrade
       - poudriere-devel
       - py311-sphinx
