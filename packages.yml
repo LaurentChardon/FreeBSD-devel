@@ -6,9 +6,12 @@
   gather_facts: yes
   vars:
     base_packages:
+      - devel/arcanist
       - cmake
       - doas
+      - freebsd-git-arc
       - git
+      - gnupg
       - htop
       - mutt
       - neofetch
@@ -72,7 +75,6 @@
       - py311-sphinx
       - qemu-user-static
       - rust
-
 
   pre_tasks:
     - name: Detect the current user's shell using getent
