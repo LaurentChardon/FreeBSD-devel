@@ -30,13 +30,8 @@
       - lightdm-gtk-greeter
       - lightdm-gtk-greeter-settings
       - xfce
-      - xfce4-bsdcpufreq-plugin
-      - xfce4-clipman-plugin
-      - xfce4-cpugraph-plugin
       - xfce4-docklike-plugin
-      - xfce4-genmon-plugin
-      - xfce4-pulseaudio-plugin
-      - xfce4-wm-themes
+      - xfce4-goodies
     gnome_packages:
       - gedit
       - gnome
@@ -52,6 +47,7 @@
       - cairo-dock-plugins
       - firefox
       - kitty
+      - thunderbird
       - xorg
     optional_packages:
       - ccache
