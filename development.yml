@@ -1,0 +1,32 @@
+- name: Configure FreeBSD ports development defaults
+  hosts: freebsd_targets
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Create /etc/make.conf only if absent
+      ansible.builtin.copy:
+        dest: /etc/make.conf
+        owner: root
+        group: wheel
+        mode: "0644"
+        force: false
+        content: |
+          # Set developer mode
+          DEVELOPER=yes
+          # Use ccache
+          #WITH_CCACHE_BUILD=yes
+          # Don't ask for options
+          BATCH=yes
+          # Use tmpfs for temp files
+          WRKDIRPREFIX=/tmp/ports
+          # Use ports package for dependencies when available
+          USE_PACKAGE_DEPENDS=yes
+
+    - name: Ensure ports workdir prefix exists
+      ansible.builtin.file:
+        path: /tmp/ports
+        state: directory
+        owner: root
+        group: wheel
+        mode: "1777"
